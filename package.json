@@ -19,6 +19,11 @@
     "@angular/platform-browser": "~8.0.0",
     "@angular/platform-browser-dynamic": "~8.0.0",
     "@angular/router": "~8.0.0",
+    "@ngx-loading-bar/core": "^4.2.0",
+    "angular-froala-wysiwyg": "^3.1.1-1",
+    "bootstrap": "^4.5.0",
+    "jquery": "^3.5.1",
+    "ngx-toastr": "^12.1.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
