@@ -1,0 +1,146 @@
+<div class="page-wrapper chiller-theme toggled">
+    <a id="show-sidebar" class="btn btn-sm btn-dark">
+      <i class="fas fa-bars"></i>
+    </a>
+    <nav id="sidebar" class="sidebar-wrapper">
+      <div class="sidebar-content">
+        <div class="sidebar-brand">
+          <a href="#">Notify</a>
+          <div id="close-sidebar">
+            <i class="fas fa-times"></i>
+          </div>
+        </div>
+        <div class="sidebar-header">
+          <div class="user-pic">
+            <img class="img-responsive img-rounded" 
+            [src]="imgUrl"
+            alt="User picture">
+          </div>
+          <div class="user-info">
+            <span class="user-name">
+              <strong>{{userName}}</strong>
+            </span>
+            <span class="user-role">{{email}}</span>
+          </div>
+        </div>
+        <!-- sidebar-search  -->
+        <div class="sidebar-menu">
+          <ul>
+            <li class="header-menu">
+              <span>General</span>
+            </li>
+            <li class="sidebar-dropdown">
+              <a href="#">
+                <i class="fa fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+                <span class="badge badge-pill badge-warning">New</span>
+              </a>
+              <div class="sidebar-submenu">
+                <ul>
+                  <li>
+                    <a href="#">Dashboard 1
+                      <span class="badge badge-pill badge-success">Pro</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="sidebar-dropdown">
+              <a href="#">
+                <i class="far fa-gem"></i>
+                <span>Bookmarks</span>
+              </a>
+            </li>
+            <li>
+              <a>
+                <i class="fa fa-calendar"></i>
+                <span>Calendar</span>
+              </a>
+            </li>
+            <li>
+              <a (click)="OnUserProfileClick()">
+                <i class="fa fa-user"></i>
+                <span>Update Profile</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- sidebar-menu  -->
+      </div>
+      <!-- sidebar-content  -->
+      <div class="sidebar-footer">
+        <a href="#">
+          <i class="fa fa-bell"></i>
+          <span class="badge badge-pill badge-warning notification">3</span>
+        </a>
+        <a href="#">
+          <i class="fa fa-envelope"></i>
+          <span class="badge badge-pill badge-success notification">7</span>
+        </a>
+        <a href="#">
+          <i class="fa fa-cog"></i>
+          <span class="badge-sonar"></span>
+        </a>
+        <a href="#">
+          <i class="fa fa-power-off"></i>
+        </a>
+      </div>
+    </nav>
+    <!-- sidebar-wrapper  -->
+  </div>
+
+
+<!-- <div class="container-fluid">
+    <div class="row min-vh-100 flex-column flex-md-row">
+        <aside class="col-12 col-md-12 p-0 flex-shrink-1 side-bar">
+            <nav class="navbar navbar-expand flex-md-column
+                         flex-row align-items-start py-2">
+                <div class="collapse navbar-collapse ">
+                    <ul class="flex-md-column flex-row navbar-nav w-100
+                                 justify-content-between">
+                        <li class="nav-item">
+                            <div class="icon-container">
+                                <img src="../../assets/notify-logo-new.png" 
+                                title="Notify"
+                                 class="img-logo img-responsive">
+                            </div>                            
+                        </li>
+                        <li class="nav-item">
+                            <div class="icon-container">
+                                <img src="../../assets/002-man.png" 
+                                 title="User Profile"
+                                 (click)="OnUserProfileClick()"
+                                 class="icon img-responsive">
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="icon-container">
+                                <img src="../../assets/001-circle.png" 
+                                title="View Starred" class="icon img-responsive">
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="icon-container">
+                                <img src="../../assets/003-tag.png"
+                                 title="Tags" class="icon img-responsive">
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="icon-container">
+                                <img src="../../assets/settings.png"
+                                 title="Settings" class="icon img-responsive">
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="icon-container-avatar">
+                                <img [src]="imgUrl"
+                                 class="icon-avatar img-responsive">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+    </div>
+</div>
+ -->

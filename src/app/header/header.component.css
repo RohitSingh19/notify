@@ -1,0 +1,40 @@
+.icon
+{
+    /* padding: 3px 12px 2px 4px; */
+    width:40px;
+    height:40px;
+    cursor: pointer;
+}
+
+.editor-tag {
+    cursor: text;
+    font-size: 16px;
+    padding: 10px 0px 10px 10px;
+    border-radius: 5px;
+    background: white;
+    border: 1px #ccc solid;
+}
+.editor-tag .tag-item {
+    line-height: 20px;
+    border-radius: 14px;
+    height: 20px;
+    font-size: 14px;
+    display: inline-block;
+    background: #17a2b8;
+    color:white;
+    padding-left: 5px;
+}
+.editor-tag .tag-item .remove-tag {
+    padding-right: 5px;
+    cursor: pointer;
+}
+.editor-tag .tag-item:not(:first-child) {
+    margin-left: 5px;
+}
+.editor-tag input {
+    margin: 0;
+    padding-left: 5px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}

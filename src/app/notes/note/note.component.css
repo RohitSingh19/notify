@@ -1,0 +1,31 @@
+.note {
+    min-height:50px;
+    max-height:50px;
+}
+
+.list-group {
+    margin-top: 2px;
+}
+
+.list-group :hover {
+    background-color:#32be8f;
+}
+
+.list-group-item:hover, .list-group :hover {
+    color:white;
+}
+
+.list-group-item, .list-group {
+    color:#32be8f;
+}
+
+.icon{
+    width: 30px;
+    height: 23px;
+}
+
+.active-route {
+    background-color:#32be8f;
+    color:white;
+    border-bottom: 2px solid black;      
+}

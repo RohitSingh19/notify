@@ -1,0 +1,70 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <img class="wave" src="../assets/wave.png">
+            <div class="img">
+                <img src="../assets/undraw_taking_notes_tjaf.svg">
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-xs-12">
+            <div class="login-content">
+                <div *ngIf="isLoading" style="text-align: center;">
+                    <app-loading-spinner></app-loading-spinner>
+                </div>
+                <form #authForm="ngForm" (ngSubmit)="onSubmitForm(authForm)" *ngIf="!isLoading">
+                    <img src="../assets/undraw_male_avatar_323b.svg">
+					<h2 class="title">Sign Up</h2>                                                                  
+					<div class="form-row">
+						<div class="form-group col-lg-12">
+							<input type="text" 
+							placeholder="Enter your Name"
+							class="form-control"
+							name="Name"
+							ngModel
+							required>            
+						  </div>
+					</div>
+                        <div class="form-row">
+                            <div class="form-group col-lg-12">
+                                <input type="text" 
+                                placeholder="Enter Your Email Id"
+                                class="form-control"
+                                name="Email"
+                                ngModel
+                                email
+                                required>            
+                              </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-lg-12">
+                                <input type="password"
+                                placeholder="Type Your Password"
+                                class="form-control"
+                                minlength="6"
+                                name="Password"
+                                ngModel
+                                required>
+                              </div>
+                        </div>
+                        <div class="form-row">                            
+                            <div class="form-group col-lg-4 col-md-5 col-xs-12">
+                                <button type="button"
+                                type="submit"                                
+                                [disabled]="!authForm.valid"
+                                class="login-btn btn btn-block btn-sm btn-outline-success">Register</button>
+                            </div>
+                            <div class="form-group col-lg-8 col-md-8 col-xs-12">
+                                <a routerLink="/auth/login"
+                                 class="login-btn btn btn-block btn-sm btn-outline-success">
+                                 Already have an account? Login</a>
+                                <button type="button"                             
+                                 [disabled]="!authForm.valid"
+                                 class="login-btn btn btn-block btn-outline-success">Already have an account? Login</button>
+                            </div>  
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,65 @@
+.notes-content {
+    overflow: auto;
+    height: 70vh;
+}
+
+style-4::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.style-4::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+.style-4::-webkit-scrollbar-thumb
+{
+	background-color: #000000;
+	border: 2px solid #555555;
+}
+
+
+
+.form-control:focus {
+	border-color: #32be8f;
+	box-shadow: 0 0 0 0.2rem rgba(74, 231, 153, 0.25);
+} 
+
+.btn-custom {
+  color: #32be8f;
+  background-color: #ffffff;
+  border-color: #32be8f;
+}
+
+.btn-custom:hover,
+.btn-custom:active,
+.btn-custom:focus,
+.btn-custom.active {
+  background: #32be8f;
+  color: #ffffff;
+  border-color: #32be8f;
+  
+}
+
+@media(max-width: 767px) {
+  .notes-div {
+    margin-top: -600px;
+  }
+}
+
+
+body::-webkit-scrollbar {
+    width: 1em;
+}
+ 
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}

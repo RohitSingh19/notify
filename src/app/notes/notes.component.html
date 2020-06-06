@@ -1,0 +1,60 @@
+<div class="notes-div">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 text-center">
+            <small>Total Note(s):
+                <span class="badge badge-info"> {{totalNotesCount}} </span>
+            </small>
+        </div>
+    </div>
+    <hr>
+    
+    <div *ngIf="isLoading" style="text-align: center;">
+        <app-loading-spinner></app-loading-spinner>
+    </div>
+
+    <div *ngIf="isNotesFound else NoNotesFound;"
+         class="notes-content style-4" #notesDiv >
+        <app-note *ngFor="let noteEl of notes | keyvalue;
+        let i = index" [noteIndex]="i" [index]="noteEl.key" [note]="noteEl"></app-note>
+    </div>
+
+    <ng-template #NoNotesFound>
+        <p>No notes found. Click to add</p>
+    </ng-template>
+
+    <hr>
+    
+
+    <div class="row" *ngIf="addNewNote else addingNewNoteMode;">
+        <div class="col-xs-12 col-md-12">
+            <button class="btn btn-block btn-outline-primary btn-sm"
+             (click)="addNewNoteClickHandler()">
+                Add New Note
+            </button>
+        </div>
+    </div>
+
+    <ng-template #addingNewNoteMode>
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <input type="text" [(ngModel)]="noteTitle" 
+                placeholder="Type Note Title" class="form-control">
+            </div>
+        </div>
+        <br /> 
+        <div class="row">
+            <div class="col-xs-6 col-md-6">
+                <button (click)="saveNewNote()" 
+                class="btn btn-block btn-outline-success btn-custom btn-sm">
+                    Save Note
+                </button>
+            </div>
+            <div class="col-xs-6 col-md-6">
+                <button class="btn btn-block btn-outline-danger btn-sm" 
+                (click)="cancelNewNoteClickHandler()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</div>

@@ -1,0 +1,42 @@
+<ngx-loading-bar [diameter]="20"></ngx-loading-bar>
+<div class="mx-auto">
+    <div class="text-center">
+        <p>Hii, <strong>{{userName}}</strong> you can update your profile here!</p>
+    </div>
+    <form #Form="ngForm" (ngSubmit)="onFormSubmit(Form)">
+        <div class="form-row">
+            <div class="col">
+                <input type="text" name="email"
+                [(ngModel)]="userEmail" readonly class="form-control" title="User Email">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <input type="date" name="dob" ngbDatepicker #dp="ngbDatepicker" required ngModel class="form-control" title="DOB">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <select class='select-option form-control' required name="gender" title="Select Gender" required
+                    [(ngModel)]='optionSelected' (ngModelChange)='onOptionsSelected($event)'>
+                    <option class='option' *ngFor='let option of options' [value]="option">{{option}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <div class="file-upload-wrapper" style="border: 2px solid #4daf7c;">
+                    <input name="file-upload-field"  required
+                    type="file" name="img" (change)="onFileSelection($event)"
+                        class="file-upload-field" value="">
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <button type="submit"
+                 class="btn btn-block btn-outline-primary">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
