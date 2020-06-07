@@ -21,7 +21,7 @@ export class NoteService {
     items: Observable<Note[]>;
     baseUrl = environment.firebaseConfig.databaseURL;
 
-    invokeFirstComponentFunction = new EventEmitter(); 
+    invokeFirstComponentFunction = new EventEmitter();
     subsVar: Subscription;
 
     constructor(private afDb: AngularFireDatabase,
@@ -34,7 +34,7 @@ export class NoteService {
 
     onFirstComponentButtonClick() {
         this.invokeFirstComponentFunction.emit();
-    } 
+    }
 
     /*This function returns the total count of notes created by user.*/
 
@@ -59,6 +59,23 @@ export class NoteService {
         .get<Note>(`${this.baseUrl}/users/${userId}/notes/${noteId}.json`);
     }
 
+
+    saveNewNoteInDb(userId: string, body: Note) {
+        const db = firebase.database().ref('users/' + userId + '/notes/').push();
+        const key = db.key;
+        const NoteData = {
+            id: key,
+            createdBy: body.createdBy,
+            createdDate: body.createdDate,
+            isBookmarked: body.isBookmarked,
+            noteContentHtml: body.noteContentHtml,
+            noteContentPlain: body.noteContentPlain,
+            noteTitle: body.noteTitle,
+            updatedDate: body.updatedDate
+        };
+        db.set(NoteData);
+    }
+
     postData(body: any, collectionName: string): Observable<any> {
         return new Observable((observer) => {
             this.afDb.database.ref().child(`${collectionName}`).push(body)
@@ -73,8 +90,8 @@ export class NoteService {
 
                 const newNote = new Note(noteTitle, updatedBy,
                                         noteContentPlain, noteContentHtml,
-                                        false, updatedDate, updatedDate);
-                
+                                        false, updatedDate, updatedDate, noteId);
+
                 const db = firebase.database();
 
                 const finalUrl = `/users/${updatedBy}/notes/`;

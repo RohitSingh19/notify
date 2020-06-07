@@ -11,7 +11,7 @@ import 'froala-editor/js/plugins/emoticons.min.js';
 import 'froala-editor/js/plugins/colors.min.js';
 import 'froala-editor/./js/plugins/print.min.js';
 import 'froala-editor/./js/plugins/link.min.js';
-import 'froala-editor/./js/plugins/image.min.js';
+// import 'froala-editor/./js/plugins/image.min.js';
 import 'froala-editor/./js/plugins/quote.min.js';
 import 'froala-editor/./js/plugins/align.min.js';
 import { AuthService } from '../auth/auth-service';
@@ -114,7 +114,8 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
     console.log(this.rawHtml);
   }
 
-  updateNote(noteContentPlain: string, notContentHtml: string, noteId: string, noteTitle: string) {
+  updateNote(noteContentPlain: string, notContentHtml: string,
+             noteId: string, noteTitle: string) {
     this.loader.start();
     this.updatedDate = new Date().toISOString();
     noteContentPlain = noteContentPlain.replace(/<[^>]*>/g, '');

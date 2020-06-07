@@ -1,12 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NoteService } from '../notes/note.service';
 import { User } from '../auth/user.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthService } from '../auth/auth-service';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { find, get, pull } from 'lodash';
+import { find, pull } from 'lodash';
 import { ConfirmationDialogServiceService } from '../shared/confirmation-dialog/confirmation-dialog-service.service';
-import { NotesComponent } from '../notes/notes.component';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-header',
@@ -23,9 +24,9 @@ export class HeaderComponent implements OnInit {
   tags: string[] = [];
   form: FormGroup;
   AddTagFlag = false;
-  
+
   constructor(private notesService: NoteService, private route: ActivatedRoute,
-              private authService: AuthService,
+              private authService: AuthService, private toaster: ToastrService,
               private fb: FormBuilder, private router: Router,
               private confirmationDialogService: ConfirmationDialogServiceService) { }
 
@@ -76,11 +77,11 @@ export class HeaderComponent implements OnInit {
 
     const bookmark = !this.noteBookmark;
 
-    this.notesService
-      .updateBookmark(this.user.localId, this.currentNoteId,
-       bookmark);
+    this.notesService.updateBookmark(this.user.localId, this.currentNoteId,bookmark);
     if (bookmark) {
+      this.toaster.info('Note saved to bookmark', 'Notify!');
     } else {
+      this.toaster.info('Note removed from bookmark', 'Notify!');
     }
     this.IsNoteBookMarked(this.currentNoteId, this.user.localId);
   }
@@ -95,12 +96,6 @@ export class HeaderComponent implements OnInit {
       }
     })
     .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
-    // this.notesService.deleteNote(this.currentNoteId, this.user.localId);
-    // this.notesService.getNotesCount(this.user.localId).subscribe((res: number) => {
-    //   this.notesService.updateTotalNoteCount(res - 1, this.user.localId);
-    //   alert('sucees');
-    // });
-    
   }
 
   focusTagInput(): void {

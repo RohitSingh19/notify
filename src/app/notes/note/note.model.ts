@@ -1,4 +1,5 @@
 export class Note {
+    id: string;
     noteTitle: string;
     noteContentPlain: string;
     noteContentHtml: string;
@@ -10,7 +11,8 @@ export class Note {
 
     constructor(noteTitle: string, createdBy: string, noteContentPlain?: string,
                 noteContentHtml?: string, isBookmarked?: boolean,
-                createdDate?: string, updatedDate?: string) {
+                createdDate?: string, updatedDate?: string, id?: string) {
+        this.id = id;
         this.noteTitle = noteTitle;
         this.noteContentPlain = noteContentPlain;
         this.noteContentHtml = noteContentHtml;
