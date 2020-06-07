@@ -4,18 +4,12 @@ import { NoteService } from './note.service';
 import { User } from '../auth/user.model';
 import { ActivatedRoute } from '@angular/router';
 
-interface NoteKeyValuePair {
-  key: string;
-  value: Note;
-}
 
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.css']
 })
-
-
 
 export class NotesComponent implements OnInit {
 
@@ -90,38 +84,40 @@ export class NotesComponent implements OnInit {
   }
 
   saveNewNote() {
-    this.isLoading = true;
     let Title = this.noteTitle;
     Title === '' ? Title = 'NEW NOTE' : Title = this.noteTitle.trim().toUpperCase();
-    const newNote = new Note(Title, this.currentUserId, '', '', false, new Date().toISOString(),
+    const newNote = new Note(Title, this.currentUserId, ' ', ' ', false, new Date().toISOString(),
     new Date().toISOString());
-    this.notesService.saveNewNoteInDb(this.currentUserId, newNote);
-    // this.notesService.postData(newNote, `users/${this.currentUserId}/notes`)
-    // .subscribe(result => {
-    // });
-
-    this.notesService.getAllNotes(this.currentUserId)
-      .subscribe((res: Note[]) => {
-        this.addNewNote = true;
-        this.notes = res;
-        this.isNotesFound = true;
-        this.isLoading = false;
-    });
+    this.notesService.saveNewNoteInDb(this.currentUserId, newNote)
+        .then(() => {
+          this.showAllNotes();
+          this.addNewNote = true;
+        });
   }
 
 
   showAllNotes() {
     this.isLoading = true;
+    this.isNotesFound = false;
     const uid = this.route.snapshot.paramMap.get('uid');
     if (uid) {
       this.currentUserId = uid;
+      let count = 0;
       this.notesService.getAllNotes(uid)
         .subscribe((res: Note[]) => {
-          this.notes = res;
+          const Notes = res;
+          const noteArray: Note[] = [];
+          for (const key in Notes) {
+            if (Notes[key]) {
+              noteArray.push(Notes[key]);
+              count++;
+            }
+          }
+          this.totalNotesCount = count;
+          this.notes = noteArray;
           this.isLoading = false;
           this.isNotesFound = true;
-          console.log(this.notes);
-      });
+        });
     }
   }
 }

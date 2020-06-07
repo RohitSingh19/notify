@@ -25,7 +25,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class WorkbookComponent implements OnInit, AfterViewInit {
 
-  rawHtml: string = "Heyaaaaaaaaaaaa";
+  rawHtml = 'a';
   selectedNote: Note;
   updatedBy: string;
   updatedDate: string;
@@ -33,6 +33,9 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
   noteId: string;
   notesIndexSubscription: Subscription;
   selectedNoteTitle: string;
+  @ViewChild('InputText', {static: false}) froalTextInput: ElementRef;
+  @ViewChild('InputTextTEST', {static: false}) InputTextTEST: ElementRef;
+  
 
   public options: object = {
     placeholderText: 'Type something here.',
@@ -47,9 +50,6 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
       }
     }
   };
-
-   @ViewChild('InputText', {static: false}) froalTextInput: ElementRef;
-
   ngAfterViewInit() {
     fromEvent(this.froalTextInput.nativeElement, 'keyup').pipe(
       map((event: any) => {
@@ -86,6 +86,9 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
                           this.selectedNote = note;
                           this.editorContent = this.selectedNote.noteContentHtml;
                           this.selectedNoteTitle = this.selectedNote.noteTitle;
+                          setTimeout(() => { // this will make the execution after the above boolean has changed
+                            this.InputTextTEST.nativeElement.focus();
+                          }, 100);
                   });
         };
       }

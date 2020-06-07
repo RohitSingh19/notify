@@ -90,9 +90,11 @@ export class HeaderComponent implements OnInit {
     this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to delete this note?')
     .then((confirmed) => {
       if (confirmed) {
-         this.notesService.deleteNote(this.currentNoteId, this.user.localId);
-         this.notesService.onFirstComponentButtonClick();
-         this.router.navigate(['/home', this.user.localId]);
+         this.notesService.deleteNote(this.currentNoteId, this.user.localId)
+         .then(() => {
+          this.notesService.onFirstComponentButtonClick();
+          this.router.navigate(['/home', this.user.localId]);
+         });
       }
     })
     .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));

@@ -61,19 +61,19 @@ export class NoteService {
 
 
     saveNewNoteInDb(userId: string, body: Note) {
-        const db = firebase.database().ref('users/' + userId + '/notes/').push();
-        const key = db.key;
-        const NoteData = {
-            id: key,
-            createdBy: body.createdBy,
-            createdDate: body.createdDate,
-            isBookmarked: body.isBookmarked,
-            noteContentHtml: body.noteContentHtml,
-            noteContentPlain: body.noteContentPlain,
-            noteTitle: body.noteTitle,
-            updatedDate: body.updatedDate
-        };
-        db.set(NoteData);
+            const db = firebase.database().ref('users/' + userId + '/notes/').push();
+            const key = db.key;
+            const NoteData = {
+                id: key,
+                createdBy: body.createdBy,
+                createdDate: body.createdDate,
+                isBookmarked: body.isBookmarked,
+                noteContentHtml: body.noteContentHtml,
+                noteContentPlain: body.noteContentPlain,
+                noteTitle: body.noteTitle,
+                updatedDate: body.updatedDate
+            };
+            return db.set(NoteData);
     }
 
     postData(body: any, collectionName: string): Observable<any> {
@@ -120,7 +120,7 @@ export class NoteService {
     deleteNote(noteId: string, updatedBy: string) {
         const db = firebase.database();
         const finalUrl = `/users/${updatedBy}/notes/`;
-        db.ref(finalUrl).child(noteId).remove();
+        return db.ref(finalUrl).child(noteId).remove();
     }
 
     isBookmarked(userId: string, noteId: string): Observable<any> {

@@ -1,40 +1,35 @@
-<div class="row">
-    <div class="col-lg-12 col-xs-12">
-        <div class="row">
-            <div class="col-lg-1 col-xs-2">
-                <img src="../../assets/trash-green.png" 
-                (click)="DeleteNote()"
-                 title="Delete Note" class="icon img-responsive">
-            </div>
-            <div class="col-lg-1 col-xs-2">
-                <img src="../../assets/004-star.png" (click)="toggleBookmark()"
-                 title={{bookmarkToolTip}} class="icon img-responsive">
-            </div>
-            <div class="col-lg-1 col-xs-2">
-                <img src="../../assets/004-mail.png" 
-                title="Send Note As Mail" class="icon img-responsive">
-            </div>
-            <div class="col-lg-1 col-xs-2">
-                <img src="../../assets/003-tag.png" 
-                (click)="toggleTagInput()"
-                title="Tags" class="icon img-responsive">
-            </div>
-            <div class="col-lg-8" *ngIf="AddTagFlag">
-                <div [formGroup]="form">
-                    <div class="editor-tag" (click)="focusTagInput()">
-                        <span class="tag-item" *ngFor="let tag of tags">
-                              {{tag}}
-                              <span class="remove-tag" (click)="removeTag(tag)">×</span>
-                            </span>
-                            <input
-                            placeholder="add tags.."
-                            #tagInput type="text"
-                            class="input-tag"
-                            (keyup)="onKeyUp($event)"
-                            formControlName="tag">
-                          </div>
-                    </div>                    
-            </div>
-        </div>
+<div class="d-flex flex-row">
+    <div class="p-2">
+        <img src="../../assets/trash-green.png" (click)="DeleteNote()" 
+        title="Delete Note" class="icon img-responsive">
     </div>
+    <div class="p-2">
+        <img src="../../assets/004-star.png" (click)="toggleBookmark()" 
+        title={{bookmarkToolTip}}
+            class="icon img-responsive">
+    </div>
+    <div class="p-2">
+        <img src="../../assets/004-mail.png" title="Send Note As Mail"
+         class="icon img-responsive">
+    </div>
+    <div class="p-2">
+        <img src="../../assets/003-tag.png" (click)="toggleTagInput()" 
+        title="Tags" class="icon img-responsive">
+    </div>
+</div>
+<div class="d-flex flex-column" *ngIf="AddTagFlag">
+    <div [formGroup]="form" class="p-2">
+        <div class="editor-tag" (click)="focusTagInput()">
+            <span class="tag-item" *ngFor="let tag of tags">
+                  {{tag}}
+                  <span class="remove-tag" (click)="removeTag(tag)">×</span>
+                </span>
+                <input
+                placeholder="add tags.."
+                #tagInput type="text"
+                class="input-tag"
+                (keyup)="onKeyUp($event)"
+                formControlName="tag">
+              </div>
+        </div>  
 </div>
