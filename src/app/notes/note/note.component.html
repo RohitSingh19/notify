@@ -1,4 +1,4 @@
- <div class="list-group">
+ <div class="list-group" [ngClass]="{'bookmarked' : noteData.isBookmarked}">
             <a style="cursor: pointer;"
             [routerLink]="[noteData.id]"
             routerLinkActive="active-route"

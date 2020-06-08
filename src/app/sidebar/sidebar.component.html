@@ -5,7 +5,7 @@
     <nav id="sidebar" class="sidebar-wrapper">
       <div class="sidebar-content">
         <div class="sidebar-brand">
-          <a href="#">Notify</a>
+          <a>Notify</a>
           <div id="close-sidebar">
             <i class="fas fa-times"></i>
           </div>
@@ -30,7 +30,7 @@
               <span>General</span>
             </li>
             <li>
-              <a>
+              <a (click)="featureUnderProgress()">
                 <i class="fa fa-calendar"></i>
                 <span>Calendar</span>
               </a>
@@ -47,19 +47,19 @@
       </div>
       <!-- sidebar-content  -->
       <div class="sidebar-footer">
-        <a href="#">
+        <a (click)="featureUnderProgress()">
           <i class="fa fa-bell"></i>
           <span class="badge badge-pill badge-warning notification">3</span>
         </a>
-        <a href="#">
+        <a (click)="featureUnderProgress()">
           <i class="fa fa-envelope"></i>
           <span class="badge badge-pill badge-success notification">7</span>
         </a>
-        <a href="#">
+        <a (click)="featureUnderProgress()">
           <i class="fa fa-cog"></i>
           <span class="badge-sonar"></span>
         </a>
-        <a href="#">
+        <a (click)="featureUnderProgress()" title="Logout">
           <i class="fa fa-power-off"></i>
         </a>
       </div>

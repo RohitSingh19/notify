@@ -1,6 +1,10 @@
-.select-note {
-    margin:auto;
-    width:50%;
-    text-align: center;
+.selected-note {
     margin: 50%;
+    width: 50%;
 }
+
+/* .alert alert-primary {
+    color: #32be8f;
+    background-color: #c4ffeb;
+    border-color: #c4ffeb;
+} */

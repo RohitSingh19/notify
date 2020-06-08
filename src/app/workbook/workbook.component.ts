@@ -34,8 +34,8 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
   notesIndexSubscription: Subscription;
   selectedNoteTitle: string;
   @ViewChild('InputText', {static: false}) froalTextInput: ElementRef;
-  @ViewChild('InputTextTEST', {static: false}) InputTextTEST: ElementRef;
-  
+  @ViewChild('InputTextNoteTitle', {static: false}) InputTextNoteTitle: ElementRef;
+
 
   public options: object = {
     placeholderText: 'Type something here.',
@@ -87,7 +87,7 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
                           this.editorContent = this.selectedNote.noteContentHtml;
                           this.selectedNoteTitle = this.selectedNote.noteTitle;
                           setTimeout(() => { // this will make the execution after the above boolean has changed
-                            this.InputTextTEST.nativeElement.focus();
+                            this.InputTextNoteTitle.nativeElement.focus();
                           }, 100);
                   });
         };
@@ -99,7 +99,7 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
       this.editorContent = this.selectedNote.noteContentPlain;
     });
   }
- 
+
   transform(value: any): any {
     return value.split('&lt;').join('<').split('&gt;').join('>');
   }
@@ -126,6 +126,12 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
     this.updatedBy, this.updatedDate, noteId, noteTitle);
     this.loader.complete();
   }
-
+  moveup() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
 }
 

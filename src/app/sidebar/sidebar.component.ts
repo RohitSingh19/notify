@@ -86,4 +86,8 @@ export class SidebarComponent implements OnInit {
     //   });
   }
 
+  featureUnderProgress() {
+    alert('Feature under development!');
+  }
+
 }

@@ -5,3 +5,15 @@
     border: solid black;
     align-self: center;
   }
+
+  @media screen and (max-width : 1920px){
+    .moveup{
+    visibility:hidden;
+    }
+  }
+
+@media screen and (max-width : 906px){
+  .moveup{
+   visibility:visible;
+   }
+ }

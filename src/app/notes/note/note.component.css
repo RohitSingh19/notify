@@ -28,3 +28,7 @@
     color:white;
     border-bottom: 2px solid black;      
 }
+
+.bookmarked {
+    border-left: 3px solid black;
+}
