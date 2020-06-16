@@ -1,5 +1,8 @@
 <ngx-loading-bar [diameter]="20"></ngx-loading-bar>
-<div class="mx-auto">
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="mx-auto" *ngIf="!isLoading">
     <div class="text-center">
         <p>Hii, <strong>{{userName}}</strong> you can update your profile here!</p>
     </div>
@@ -12,7 +15,8 @@
         </div>
         <div class="form-row">
             <div class="col">
-                <input type="date" name="dob" ngbDatepicker #dp="ngbDatepicker" required ngModel class="form-control" title="DOB">
+                <input type="date" name="dob" 
+                ngbDatepicker #dp="ngbDatepicker" required ngModel class="form-control" title="DOB">
             </div>
         </div>
         <div class="form-row">
@@ -25,13 +29,20 @@
         </div>
         <div class="form-row">
             <div class="col">
-                <div class="file-upload-wrapper" style="border: 2px solid #4daf7c;">
+                <div class="file-upload-wrapper" data-text="Select your file!"
+                 style="border: 2px solid #4daf7c;">
                     <input name="file-upload-field"  required
                     type="file" name="img" (change)="onFileSelection($event)"
                         class="file-upload-field" value="">
                 </div>
             </div>
         </div>
+        <div class="form-row">
+            <div class="col">
+                <p>{{fileName}}</p>
+            </div>
+        </div>
+
         <div class="form-row">
             <div class="col">
                 <button type="submit"

@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DataStorageService } from 'src/app/shared/data-storage-service';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { AuthService } from '../auth-service';
 import { User } from '../user.model';
 import { ToastrService } from 'ngx-toastr';
+import { ModalService } from 'src/app/shared/modal-popup/modal-service';
+
+
 
 @Component({
   selector: 'app-user-profile',
@@ -17,22 +20,25 @@ export class UserProfileComponent implements OnInit {
   currentUser: User;
 
   constructor(private dataStorage: DataStorageService,
-              private route: ActivatedRoute, private loader: LoadingBarService,
-              private authService: AuthService, private toastr: ToastrService) { }
+              private loader: LoadingBarService, private router: Router,
+              private authService: AuthService, private toastr: ToastrService, private modal: ModalService) { }
 
-  options = ['Male', 'Female'];
-  optionSelected: any;
+  options = ['Select Gender', 'Male', 'Female'];
+  optionSelected = 'Select Gender';
   imageFile: File;
+  fileName: string;
   userId: string;
   userName: string;
   userEmail: string;
   submitting: boolean;
+  isLoading: boolean;
 
   ngOnInit(): void {
     this.fetchUser();
   }
 
   fetchUser() {
+    this.isLoading = false;
     this.currentUser =  this.authService.getCurrentUserFromLocalStorage();
     if (this.currentUser) {
       this.authService.getCurrentUserFromDB(this.currentUser.localId)
@@ -40,6 +46,7 @@ export class UserProfileComponent implements OnInit {
           this.userName = user.name;
           this.userEmail = user.email;
           this.userId = this.currentUser.localId;
+          this.isLoading = false;
       });
     }
   }
@@ -52,6 +59,7 @@ export class UserProfileComponent implements OnInit {
     const fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       this.imageFile = fileList[0];
+      this.fileName = fileList[0].name;
     }
   }
 
@@ -59,6 +67,7 @@ export class UserProfileComponent implements OnInit {
     if (!form.valid) {
       return;
     }
+    this.isLoading = true;
     this.loader.start();
     this.submitting = false;
     const dob = form.value.dob;
@@ -66,6 +75,8 @@ export class UserProfileComponent implements OnInit {
     this.dataStorage.uploadImageToFirebaseStorage(this.userId, this.imageFile, dob, gender);
     this.loader.stop();
     this.toastr.success('Profile Updated!!', 'Notify!');
+    this.isLoading = false;
+    this.modal.close();
   }
 
 }

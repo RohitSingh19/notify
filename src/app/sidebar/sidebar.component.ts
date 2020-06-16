@@ -32,9 +32,7 @@ export class SidebarComponent implements OnInit {
         });
     }
 
-
-    $(document).ready(function ($) {
-
+     $(document).ready(function ($) {
       $(".sidebar-dropdown > a").click(function () {
         $(".sidebar-submenu").slideUp(200);
         if (
@@ -64,8 +62,6 @@ export class SidebarComponent implements OnInit {
       });
 
     });
-
-    //this.getProfilePicUrl(this.userId);
   }
 
   OnUserProfileClick() {

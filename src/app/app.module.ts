@@ -35,6 +35,9 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalenderComponent } from './calender/calender.component';
 import { CalenderEventsComponent } from './calender/calender-events';
+import { KeysPipe } from './shared/keysPipe.pipe';
+import { SafeHTMLPipe } from './shared/safe-html.pipe';
+import { SidebarDirective } from '../app/sidebar/sirebar-directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +55,9 @@ import { CalenderEventsComponent } from './calender/calender-events';
     ConfirmationDialogComponent,
     ModalPopUpComponent,
     CalenderComponent,
-    CalenderEventsComponent
+    CalenderEventsComponent,
+    KeysPipe, SafeHTMLPipe,
+    SidebarDirective
   ],
   imports: [
     BrowserModule,

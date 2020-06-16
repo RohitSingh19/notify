@@ -489,15 +489,12 @@
 /* .container-fluid {
     padding-left: 0px;
 }
-
 .icon-container {
     height: 100%;
     margin-top: 5px;
 }
-
 .icon
 {
-
     width:40px;
     height:40px;
     cursor: pointer;
@@ -510,7 +507,6 @@
 .side-bar{
     border-right: 1px solid rgba(0,0,0,.1);
 }
-
 @media(max-width: 767px) {
     .side-bar {
         border-right: none;
@@ -520,13 +516,11 @@
         min-height: 12vh!important;
     }
 }
-
 @media(max-width:767px) {
     .icon-avatar {
         display: none;
     }    
 }
-
 .icon-avatar
 {
     
