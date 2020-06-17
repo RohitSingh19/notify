@@ -95,7 +95,7 @@ export class NoteService {
                 const db = firebase.database();
 
                 const finalUrl = `/users/${updatedBy}/notes/`;
-                db.ref(finalUrl).child(noteId).set(newNote);
+                return db.ref(finalUrl).child(noteId).set(newNote);
     }
 
     updateTotalNoteCount(noteCount: number, userId: string): number {

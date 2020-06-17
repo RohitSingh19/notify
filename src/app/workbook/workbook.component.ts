@@ -31,8 +31,8 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
   updatedDate: string;
   userId: string;
   noteId: string;
-  notesIndexSubscription: Subscription;
   selectedNoteTitle: string;
+  editorContent: string;
   @ViewChild('InputText', {static: false}) froalTextInput: ElementRef;
   @ViewChild('InputTextNoteTitle', {static: false}) InputTextNoteTitle: ElementRef;
 
@@ -43,36 +43,30 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
     height: 300,
     events : {
       'keyup': function (keyupEvent) {
-        // Do something here.
-        // this is the editor instance.
         const froala = this;
-        // console.log(froala.html.get());
       }
     }
   };
+
   ngAfterViewInit() {
     fromEvent(this.froalTextInput.nativeElement, 'keyup').pipe(
       map((event: any) => {
         return event.target.innerHTML;
       }), debounceTime(2000)
     ).subscribe((text: string) => {
-      console.log(this.selectedNote);
       this.updateNote(this.editorContent,
          text, this.noteId, this.selectedNote.noteTitle);
     }, (err) => {
-      console.log(err);
+      alert(err);
     });
   }
 
   constructor(private noteService: NoteService,
               private authService: AuthService,
               private route: ActivatedRoute,
-              private loader: LoadingBarService) {
+              private loader: LoadingBarService) {}
 
-              this.notesIndexSubscription = noteService.sub$.subscribe(val => console.log(val));
-              }
-
-  editorContent: string;
+  
 
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -88,7 +82,7 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
                           this.selectedNoteTitle = this.selectedNote.noteTitle;
                           setTimeout(() => { // this will make the execution after the above boolean has changed
                             this.InputTextNoteTitle.nativeElement.focus();
-                          }, 100);
+                          }, 10);
                   });
         };
       }
@@ -103,28 +97,15 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
   transform(value: any): any {
     return value.split('&lt;').join('<').split('&gt;').join('>');
   }
-
-  onFroalaModelChanged(event: any) {
-    setTimeout(() => {
-      this.rawHtml = event;
-      console.log(this.rawHtml);
-    });
-  }
-
-
-  updateDOM(value: string) {
-    this.rawHtml = value;
-    console.log(this.rawHtml);
-  }
-
   updateNote(noteContentPlain: string, notContentHtml: string,
              noteId: string, noteTitle: string) {
     this.loader.start();
     this.updatedDate = new Date().toISOString();
+    noteContentPlain = noteContentPlain.replace('Powered by Froala Editor', '');
     noteContentPlain = noteContentPlain.replace(/<[^>]*>/g, '');
     this.noteService.updateNote(noteContentPlain, notContentHtml,
-    this.updatedBy, this.updatedDate, noteId, noteTitle);
-    this.loader.complete();
+    this.updatedBy, this.updatedDate, noteId, noteTitle)
+    .then(() => this.loader.complete());
   }
   moveup() {
     window.scroll({
