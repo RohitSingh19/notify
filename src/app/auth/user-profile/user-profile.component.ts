@@ -38,7 +38,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   fetchUser() {
-    this.isLoading = false;
+    this.isLoading = true;
     this.currentUser =  this.authService.getCurrentUserFromLocalStorage();
     if (this.currentUser) {
       this.authService.getCurrentUserFromDB(this.currentUser.localId)
@@ -78,5 +78,4 @@ export class UserProfileComponent implements OnInit {
     this.isLoading = false;
     this.modal.close();
   }
-
 }

@@ -60,7 +60,6 @@ export class SidebarComponent implements OnInit {
       $("#show-sidebar").click(function () {
         $(".page-wrapper").addClass("toggled");
       });
-
     });
   }
 
