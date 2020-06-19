@@ -31,10 +31,12 @@ import { WorkbookComponent } from './workbook/workbook.component';
 import { NewNoteComponent } from './notes/new-note/new-note.component';
 import { HomeComponent } from './home/home.component';
 import { ModalPopUpComponent } from './shared/modal-popup/modal-popup.component';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+// import { CalendarModule, DateAdapter } from 'angular-calendar';
+// import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalenderComponent } from './calender/calender.component';
-import { CalenderEventsComponent } from './calender/calender-events';
+// import { CalenderEventsComponent } from './calender/calender-events';
+
 import { KeysPipe } from './shared/keysPipe.pipe';
 import { SafeHTMLPipe } from './shared/safe-html.pipe';
 import { SidebarDirective } from '../app/sidebar/sirebar-directive';
@@ -54,10 +56,9 @@ import { SidebarDirective } from '../app/sidebar/sirebar-directive';
     UserProfileComponent,
     ConfirmationDialogComponent,
     ModalPopUpComponent,
-    CalenderComponent,
-    CalenderEventsComponent,
     KeysPipe, SafeHTMLPipe,
-    SidebarDirective
+    SidebarDirective,
+    CalenderComponent
   ],
   imports: [
     BrowserModule,
@@ -82,11 +83,7 @@ import { SidebarDirective } from '../app/sidebar/sirebar-directive';
       progressBar: true,
       progressAnimation: 'decreasing'
     }),
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }),
-
+    FullCalendarModule
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent],
