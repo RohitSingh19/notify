@@ -66,7 +66,7 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
               private route: ActivatedRoute,
               private loader: LoadingBarService) {}
 
-  
+
 
   ngOnInit(): void {
     this.route.params.subscribe(

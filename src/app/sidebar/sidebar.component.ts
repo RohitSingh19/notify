@@ -80,4 +80,9 @@ export class SidebarComponent implements OnInit {
     alert('Feature under development!');
   }
 
+  OnLogoutClick() {
+    localStorage.removeItem('user');
+    this.router.navigate(['/auth/login']);
+  }
+
 }

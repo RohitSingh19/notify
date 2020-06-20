@@ -6,6 +6,8 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalenderService } from './calender-service';
 import { CalendarEvent } from './calendar-events-model';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../auth/auth-service';
 
 
 @Component({
@@ -25,9 +27,10 @@ export class CalenderComponent implements OnInit {
   userId: string;
   isEditMode = false;
   eventId: string;
-
-  constructor(config: NgbModalConfig, private modalService: NgbModal,
-              private calenderService: CalenderService, private route: ActivatedRoute) {
+  userName: string;
+  constructor(config: NgbModalConfig, private modalService: NgbModal, private toaster: ToastrService,
+              private calenderService: CalenderService, private route: ActivatedRoute,
+              private authService: AuthService) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
@@ -36,6 +39,7 @@ export class CalenderComponent implements OnInit {
   ngOnInit() {
     this.userId = this.route.snapshot.params['uid'];
     if (this.userId) {
+      this.toaster.info('Click on any date to add events..', 'Notify!');
       this.getEvents();
     }
   }
@@ -49,7 +53,10 @@ export class CalenderComponent implements OnInit {
     this.selectedDate = arg.dateStr;
     this.Note = '';
     this.backgroundColorNoteTextArea = '#ffffff';
-    this.modalService.open(content);
+    this.authService.getCurrentUserFromDB(this.userId).subscribe(response => {
+      this.userName = response.name;
+      this.modalService.open(content);
+    });
   }
 
   handleEventClick(arg, content) {
@@ -58,7 +65,10 @@ export class CalenderComponent implements OnInit {
     this.Note = arg.event.title;
     this.eventId = arg.event.id;
     this.backgroundColorNoteTextArea = arg.event.backgroundColor;
-    this.modalService.open(content);
+    this.authService.getCurrentUserFromDB(this.userId).subscribe(response => {
+      this.userName = response.name;
+      this.modalService.open(content);
+    });
   }
   Save() {
     if (this.isEditMode) {
@@ -77,6 +87,7 @@ export class CalenderComponent implements OnInit {
           this.calendarEvents = calendarEvents;
           this.modalService.dismissAll();
           this.isEditMode = !this.isEditMode;
+          this.toaster.success('event updated', 'Notify!');
         }).catch(err => console.log(err));
     } else {
       this.calenderService.saveCalenderNoteInDb(this.userId, this.Note,
@@ -89,6 +100,7 @@ export class CalenderComponent implements OnInit {
           });
           this.isEditMode = !this.isEditMode;
           this.modalService.dismissAll();
+          this.toaster.success('new event added', 'Notify!');
         }).catch(err => console.log(err));
     }
   }

@@ -89,6 +89,7 @@ export class AuthService {
             });
     }
 
+
     saveUserDataToLocalStorage(user: User) {
         localStorage.setItem('user', JSON.stringify(user));
     }

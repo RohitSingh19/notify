@@ -12,13 +12,10 @@
   </div>
 </div>
 
-
-
-
 <ng-template #NewEventContent let-d="dismiss">
   <div class="modal-header">
-    <h4 *ngIf="!isEditMode" class="modal-title text-center" id="modal-basic-title">Hi user!, write your note..</h4>
-    <h4 *ngIf="isEditMode" class="modal-title text-center" id="modal-basic-title">Hi user!, edit your note..</h4>
+    <h4 *ngIf="!isEditMode" class="modal-title text-center" id="modal-basic-title">Hi <b>{{userName}}!</b>, write your note..</h4>
+    <h4 *ngIf="isEditMode" class="modal-title text-center" id="modal-basic-title">Hi <b>{{userName}}!</b>, edit your note..</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
