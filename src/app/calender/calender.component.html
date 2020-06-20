@@ -2,6 +2,7 @@
   <div class="col-md-8 offset-md-2">
     <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins" [weekends]="true"
       (dateClick)="handleDateClick($event, NewEventContent)" 
+      (eventClick)="handleEventClick($event, NewEventContent)"
       [events]="calendarEvents"></full-calendar>
   </div>
 </div>
@@ -11,14 +12,14 @@
 
 <ng-template #NewEventContent let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title text-center" id="modal-basic-title">Hi user!, write your note..</h4>
+    <h4 *ngIf="!isEditMode" class="modal-title text-center" id="modal-basic-title">Hi user!, write your note..</h4>
+    <h4 *ngIf="isEditMode" class="modal-title text-center" id="modal-basic-title">Hi user!, edit your note..</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <p class="text-center">Selected Date: <b>{{selectedDate}}</b></p>
-   
+    <p class="text-center">Selected Date: <b>{{selectedDate | date}}</b></p>
     <textarea class="form-control"
     [(ngModel)]="Note" name="note"
     [style.backgroundColor]="backgroundColorNoteTextArea"
@@ -29,43 +30,10 @@
     </color-github>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="Save()">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="Save()"> 
+      {{isEditMode ? 'Update': 'Save'}}</button>
   </div>
 </ng-template>
 
 
 
-<ng-template #GetEventContent let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Hi user!, your list of notes..</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>Selected Date: <b>{{selectedDate}}</b> </p>
-
-    <div>
-      <table>
-        <thead>
-          <th>Date</th>
-          <th>Note</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let event of calendarEvents">
-            <td>
-              {{event.date}}
-            </td>
-            <td>
-              {{event.title}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="Save()">Save</button>
-  </div>
-</ng-template>

@@ -12,6 +12,8 @@ export class CalenderService {
 
     baseUrl = environment.firebaseConfig.databaseURL;
     constructor(private http: HttpClient) { }
+
+
     saveCalenderNoteInDb(userId: string, event: string, eventDate: string,
                          eventColor: string, eventUpdateDate: string) {
         const db = firebase.database().ref('users/' + userId + '/calenderNotes/').push();
@@ -31,6 +33,16 @@ export class CalenderService {
     getAllCalenderNotes(userId: string): Observable<CalendarEvent[]> {
         return this.http
             .get<CalendarEvent[]>(`${this.baseUrl}/users/${userId}/calenderNotes.json`);
+    }
+
+    updateCalenderNote(userId: string, eventId: string, event: string, color: string) {
+        const db = firebase.database();
+        const update = {};
+        const eventTitle = `/users/${userId}/calenderNotes/${eventId}/note`;
+        update[eventTitle] = event;
+        const eventColor = `/users/${userId}/calenderNotes/${eventId}/noteColor`;
+        update[eventColor] = color;
+        return db.ref().update(update);
     }
 
 }
