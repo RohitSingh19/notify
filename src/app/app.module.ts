@@ -15,7 +15,7 @@ import { environment } from '../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-
+import { ColorGithubModule } from 'ngx-color/github';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -35,6 +35,7 @@ import { ModalPopUpComponent } from './shared/modal-popup/modal-popup.component'
 // import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalenderComponent } from './calender/calender.component';
+
 // import { CalenderEventsComponent } from './calender/calender-events';
 
 import { KeysPipe } from './shared/keysPipe.pipe';
@@ -83,10 +84,12 @@ import { SidebarDirective } from '../app/sidebar/sirebar-directive';
       progressBar: true,
       progressAnimation: 'decreasing'
     }),
-    FullCalendarModule
+    FullCalendarModule,
+    ColorGithubModule
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent],
-  entryComponents: [ ConfirmationDialogComponent, ModalPopUpComponent ],
+  entryComponents: [ ConfirmationDialogComponent,
+       ModalPopUpComponent],
 })
 export class AppModule { }
