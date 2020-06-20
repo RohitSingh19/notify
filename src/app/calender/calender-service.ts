@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { CalendarEvent } from './calendar-events-model';
 
 @Injectable({
     providedIn: 'root'
@@ -27,9 +28,9 @@ export class CalenderService {
     }
 
 
-    getAllCalenderNotes(userId: string): Observable<any> {
+    getAllCalenderNotes(userId: string): Observable<CalendarEvent[]> {
         return this.http
-            .get<any[]>(`${this.baseUrl}/users/${userId}/calenderNotes.json`);
+            .get<CalendarEvent[]>(`${this.baseUrl}/users/${userId}/calenderNotes.json`);
     }
 
 }
