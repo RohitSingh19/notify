@@ -5,6 +5,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalenderService } from './calender-service';
 import { CalendarEvent } from './calendar-events-model';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -21,19 +22,22 @@ export class CalenderComponent implements OnInit {
   selectedDate: string;
   Note: string;
   backgroundColorNoteTextArea: string;
-  userId = 'gjdK0FSLe8aWv6SO83f0ZhvrFUO2';
+  userId: string;
   isEditMode = false;
   eventId: string;
 
   constructor(config: NgbModalConfig, private modalService: NgbModal,
-    private calenderService: CalenderService) {
+              private calenderService: CalenderService, private route: ActivatedRoute) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
 
 
   ngOnInit() {
-    this.getEvents();
+    this.userId = this.route.snapshot.params['uid'];
+    if (this.userId) {
+      this.getEvents();
+    }
   }
 
   changeComplete($event) {
@@ -62,7 +66,7 @@ export class CalenderComponent implements OnInit {
         updateCalenderNote(this.userId, this.eventId, this.Note, this.backgroundColorNoteTextArea)
         .then(res => {
           console.log(this.eventId);
-          let calendarEvents = this.calendarEvents.slice();
+          const calendarEvents = this.calendarEvents.slice();
           // tslint:disable-next-line: prefer-for-of
           for (let index = 0; index < calendarEvents.length; index++) {
             if (calendarEvents[index].id === this.eventId) {

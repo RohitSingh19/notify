@@ -18,8 +18,8 @@ export class SidebarComponent implements OnInit {
   userName: string;
   email: string;
 
-  constructor(private route: ActivatedRoute,private authService: AuthService,
-              private modalService: ModalService) { }
+  constructor(private route: ActivatedRoute, private authService: AuthService,
+              private modalService: ModalService, private router: Router) { }
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.params['uid'];
@@ -68,17 +68,12 @@ export class SidebarComponent implements OnInit {
     this.modalService.openModal();
   }
 
+  OnCalendarClick() {
+    this.router.navigate(['/calendar', this.userId]);
+  }
 
 
   getProfilePicUrl(id: string) {
-    // this.authService.getCurrentUserFromDB(id)
-    //   .subscribe((user: User) => {
-    //     if (user.avatarUrl !== null && user.avatarUrl !== '') {
-    //       this.imgUrl = user.avatarUrl;
-    //     } else {
-    //       this.imgUrl = '../assets/avatar.svg';
-    //     }
-    //   });
   }
 
   featureUnderProgress() {
