@@ -28,12 +28,15 @@ export class SidebarComponent implements OnInit {
           .subscribe((response: User) => {
             this.userName = response.name;
             this.email = response.email;
-            this.imgUrl = response.avatarUrl;
+            if (response.avatarUrl.length > 0) {
+                  this.imgUrl = response.avatarUrl;
+            }
         });
     }
 
-     $(document).ready(function ($) {
-      $(".sidebar-dropdown > a").click(function () {
+    // tslint:disable-next-line: only-arrow-functions
+    $(document).ready(function ($) {
+      $('.sidebar-dropdown > a').click(function () {
         $(".sidebar-submenu").slideUp(200);
         if (
           $(this)
@@ -61,6 +64,7 @@ export class SidebarComponent implements OnInit {
         $(".page-wrapper").addClass("toggled");
       });
     });
+
   }
 
   OnUserProfileClick() {

@@ -3,9 +3,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError, Subject, Observable } from 'rxjs';
 import { User } from './user.model';
-import { DataStorageService } from '../shared/data-storage-service';
-// import { AngularFireAuth } from 'angularfire2/auth';
 import {environment} from '../../environments/environment';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 
 export interface AuthResponseData {
@@ -27,7 +26,7 @@ export class AuthService {
     FIREBASE_BASE_URL = environment.firebaseBaseUrl;
 
     constructor(private httpClient: HttpClient,
-                private dataStorageService: DataStorageService) { }
+                private afDb: AngularFireDatabase) { }
 
     signUp(EMAIL: string, PASSWORD: string, NAME: string) {
         return this.httpClient
@@ -62,10 +61,28 @@ export class AuthService {
         const userProfile = new User(email, token, refreshToken,
                                  expirationDate, name, '', '', '', true, 0);
 
-        this.saveUserData(userProfile);
-        this.user.next(userProfile);
+        this.saveUserData(userProfile).subscribe((res) => {
+            console.log(res);
+        });
+        
         this.saveUserDataToLocalStorage(userProfile);
     }
+
+    saveUserData(user: User): Observable<any> {
+        return new Observable((observer) => {
+            this.afDb.database.ref().child(`users/${user.localId}`).set(user);
+        });
+    }
+
+    saveUserDataToLocalStorage(user: User) {
+        localStorage.setItem('user', JSON.stringify(user));
+    }
+
+    getCurrentUserFromDB(userId: string): Observable<User> {
+        return this.httpClient.
+        get<User>(`https://notify-6f104.firebaseio.com/users/${userId}.json`);
+    }
+
 
     autoLogin(): boolean {
         const user = JSON.parse(localStorage.getItem('user'));
@@ -79,24 +96,6 @@ export class AuthService {
     getCurrentUserFromLocalStorage(): User {
         const user = JSON.parse(localStorage.getItem('user'));
         return user;
-    }
-
-    saveUserData(user: User) {
-        console.log(user);
-        this.dataStorageService.postData(user, 'users')
-            .subscribe(res => {
-                console.log(res);
-            });
-    }
-
-
-    saveUserDataToLocalStorage(user: User) {
-        localStorage.setItem('user', JSON.stringify(user));
-    }
-
-    getCurrentUserFromDB(userId: string): Observable<User> {
-        return this.httpClient.
-        get<User>(`https://notify-6f104.firebaseio.com/users/${userId}.json`);
     }
 
     private handleError(errorMsg: HttpErrorResponse) {
