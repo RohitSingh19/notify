@@ -14,12 +14,12 @@ export class CalenderService {
     constructor(private http: HttpClient) { }
 
 
-    saveCalenderNoteInDb(userId: string, event: string, eventDate: string,
+    saveCalenderNoteInDb(userId: string, event: string, eventId: string,  eventDate: string,
                          eventColor: string, eventUpdateDate: string) {
-        const db = firebase.database().ref('users/' + userId + '/calenderNotes/').push();
-        const key = db.key;
+        const db = firebase.database().ref('users/' + userId).child('calendarNotes').child(eventId);
+        // const db = firebase.database().ref('users/' + userId + '/calenderNotes/' + eventId).push();
         const data = {
-            id: key,
+            id: eventId,
             note: event,
             noteDate: eventDate,
             noteColor: eventColor,
@@ -27,20 +27,22 @@ export class CalenderService {
             createdBy: userId
         };
         return db.set(data);
+        // return firebase.firestore()
+        //        .collection('CalendarNote').doc(eventId).set(data);
     }
 
 
     getAllCalenderNotes(userId: string): Observable<CalendarEvent[]> {
         return this.http
-            .get<CalendarEvent[]>(`${this.baseUrl}/users/${userId}/calenderNotes.json`);
+            .get<CalendarEvent[]>(`${this.baseUrl}/users/${userId}/calendarNotes.json`);
     }
 
     updateCalenderNote(userId: string, eventId: string, event: string, color: string) {
         const db = firebase.database();
         const update = {};
-        const eventTitle = `/users/${userId}/calenderNotes/${eventId}/note`;
+        const eventTitle = `/users/${userId}/calendarNotes/${eventId}/note`;
         update[eventTitle] = event;
-        const eventColor = `/users/${userId}/calenderNotes/${eventId}/noteColor`;
+        const eventColor = `/users/${userId}/calendarNotes/${eventId}/noteColor`;
         update[eventColor] = color;
         return db.ref().update(update);
     }

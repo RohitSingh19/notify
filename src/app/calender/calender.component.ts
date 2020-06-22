@@ -53,6 +53,7 @@ export class CalenderComponent implements OnInit {
     this.selectedDate = arg.dateStr;
     this.Note = '';
     this.backgroundColorNoteTextArea = '#ffffff';
+    this.eventId = '';
     this.authService.getCurrentUserFromDB(this.userId).subscribe(response => {
       this.userName = response.name;
       this.modalService.open(content);
@@ -90,13 +91,15 @@ export class CalenderComponent implements OnInit {
           this.toaster.success('event updated', 'Notify!');
         }).catch(err => console.log(err));
     } else {
-      this.calenderService.saveCalenderNoteInDb(this.userId, this.Note,
+      const currentTimeStamp = Date.now().toString();
+      this.calenderService.saveCalenderNoteInDb(this.userId, this.Note,currentTimeStamp,
         this.selectedDate, this.backgroundColorNoteTextArea, new Date().toISOString())
         .then(res => {
           this.calendarEvents = this.calendarEvents.concat({
             title: this.Note,
             date: this.selectedDate,
-            color: this.backgroundColorNoteTextArea
+            color: this.backgroundColorNoteTextArea,
+            id: currentTimeStamp
           });
           this.isEditMode = !this.isEditMode;
           this.modalService.dismissAll();
