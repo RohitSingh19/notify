@@ -28,6 +28,8 @@ export class CalenderComponent implements OnInit {
   isEditMode = false;
   eventId: string;
   userName: string;
+  pickedColor: string;
+
   constructor(config: NgbModalConfig, private modalService: NgbModal, private toaster: ToastrService,
               private calenderService: CalenderService, private route: ActivatedRoute,
               private authService: AuthService) {
@@ -44,8 +46,8 @@ export class CalenderComponent implements OnInit {
     }
   }
 
-  changeComplete($event) {
-    this.backgroundColorNoteTextArea = ($event.color.hex);
+  changeComplete(newColor) {
+    this.backgroundColorNoteTextArea = newColor;
   }
 
   handleDateClick(arg, content) {
@@ -92,6 +94,9 @@ export class CalenderComponent implements OnInit {
         }).catch(err => console.log(err));
     } else {
       const currentTimeStamp = Date.now().toString();
+      if(this.backgroundColorNoteTextArea.length <= 0) {
+        this.backgroundColorNoteTextArea = '#8ce8b4';
+      }
       this.calenderService.saveCalenderNoteInDb(this.userId, this.Note,currentTimeStamp,
         this.selectedDate, this.backgroundColorNoteTextArea, new Date().toISOString())
         .then(res => {

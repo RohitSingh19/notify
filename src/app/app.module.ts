@@ -15,7 +15,7 @@ import { environment } from '../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { ColorGithubModule } from 'ngx-color/github';
+// import { ColorGithubModule } from 'ngx-color/github';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -85,7 +85,7 @@ import { SidebarDirective } from '../app/sidebar/sirebar-directive';
       progressAnimation: 'decreasing'
     }),
     FullCalendarModule,
-    ColorGithubModule
+    
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent],

@@ -22,14 +22,20 @@
   </div>
   <div class="modal-body">
     <p class="text-center">Selected Date: <b>{{selectedDate | date}}</b></p>
-    <textarea class="form-control"
-    [(ngModel)]="Note" name="note"
-    [style.backgroundColor]="backgroundColorNoteTextArea"
-    placeholder="type your note here!" rows="2" cols="4">
-    </textarea>
-    <color-github color="#fff" 
+    <div>
+      <textarea class="form-control"
+      [(ngModel)]="Note" name="note"
+      [style.backgroundColor]="backgroundColorNoteTextArea"
+      placeholder="type your note here!" rows="2" cols="4">
+      </textarea>
+      <input type="color" class="pull-right"
+      style="float:right" 
+      [(ngModel)]="pickedColor"
+      (ngModelChange)="changeComplete($event)"/>
+    </div>
+    <!-- <color-github color="#fff" 
     (onChangeComplete)="changeComplete($event)">
-    </color-github>
+    </color-github> -->
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="Save()"> 
