@@ -25,7 +25,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class WorkbookComponent implements OnInit, AfterViewInit {
 
-  rawHtml = 'a';
+  
   selectedNote: Note;
   updatedBy: string;
   updatedDate: string;
@@ -42,7 +42,7 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
     pluginsEnabled: ['image', 'link', 'colors'],
     height: 300,
     events : {
-      'keyup': function (keyupEvent) {
+      'keyup' (keyupEvent) {
         const froala = this;
       }
     }
@@ -84,7 +84,7 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
                             this.InputTextNoteTitle.nativeElement.focus();
                           }, 10);
                   });
-        };
+        }
       }
     );
     this.noteService.selectedNote.subscribe((note: Note) => {
@@ -97,6 +97,7 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
   transform(value: any): any {
     return value.split('&lt;').join('<').split('&gt;').join('>');
   }
+
   updateNote(noteContentPlain: string, notContentHtml: string,
              noteId: string, noteTitle: string) {
     this.loader.start();
@@ -107,6 +108,7 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
     this.updatedBy, this.updatedDate, noteId, noteTitle)
     .then(() => this.loader.complete());
   }
+
   moveup() {
     window.scroll({
       top: 0,

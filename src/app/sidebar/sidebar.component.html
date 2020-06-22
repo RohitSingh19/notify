@@ -4,16 +4,19 @@
   </a>
   <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
-      <div class="sidebar-brand">
-        <a>Notify</a>
+      <div class="sidebar-brand text-center">
+        <a style="font-size: 20px;">Notify</a>
         <div id="close-sidebar">
           <i class="fas fa-times"></i>
         </div>
       </div>
       <div class="sidebar-header">
         <div class="user-pic">
+          <div *ngIf="isLoading" style="text-align: center;">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
           <img class="img-responsive img-rounded" 
-          [src]="imgUrl"
+          [src]="imgUrl"  *ngIf="!isLoading"
           alt="User picture">
         </div>
         <div class="user-info">

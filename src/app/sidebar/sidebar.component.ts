@@ -17,11 +17,13 @@ export class SidebarComponent implements OnInit {
 
   userName: string;
   email: string;
+  isLoading = true;
 
   constructor(private route: ActivatedRoute, private authService: AuthService,
               private modalService: ModalService, private router: Router) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.userId = this.route.snapshot.params['uid'];
     if (this.userId) {
       this.authService.getCurrentUserFromDB(this.userId)
@@ -31,9 +33,9 @@ export class SidebarComponent implements OnInit {
             if (response.avatarUrl.length > 0) {
                   this.imgUrl = response.avatarUrl;
             }
+            this.isLoading = false;
         });
     }
-
     // tslint:disable-next-line: only-arrow-functions
     $(document).ready(function ($) {
       $('.sidebar-dropdown > a').click(function () {
