@@ -20,6 +20,12 @@ export class NoteComponent implements OnInit {
 
   ngOnInit(): void {
     this.noteData = this.note['value'];
+    // Powered by Froala Editor
+    this.noteData.noteContentPlain.replace('Powered by Froala Editor', '');
+    if (this.noteData.noteContentPlain.length > 20) {
+         // tslint:disable-next-line: no-unused-expression
+         this.noteData.noteContentPlain = this.noteData.noteContentPlain.substring(0, 19) + '...';
+    }
     this.lastUpdatedDateNote = new Date(this.noteData.updatedDate);
   }
 

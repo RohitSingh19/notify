@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/notify",
+    "public": "dist\\notify",
     "ignore": [
       "firebase.json",
       "**/.*",

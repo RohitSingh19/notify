@@ -85,7 +85,6 @@ import { SidebarDirective } from '../app/sidebar/sirebar-directive';
       progressAnimation: 'decreasing'
     }),
     FullCalendarModule,
-    
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent],
