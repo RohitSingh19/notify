@@ -108,16 +108,6 @@ export class NoteService {
         return noteCount;
     }
 
-
-    updateNoteTags(noteId: string, userId: string, tags: string[]) {
-        const db = firebase.database();
-        const update = {};
-        const finalUrl = `/users/${userId}/notes/${noteId}/tags`;
-        update[finalUrl] = tags;
-        db.ref().update(update);
-    }
-
-
     deleteNote(noteId: string, updatedBy: string) {
         const db = firebase.database();
         const finalUrl = `/users/${updatedBy}/notes/`;

@@ -40,25 +40,7 @@ export class HeaderComponent implements OnInit {
         this.currentNoteId = params['noteId'];
         this.user = this.authService.getCurrentUserFromLocalStorage();
         this.IsNoteBookMarked(this.currentNoteId, this.user.localId);
-        this.readTags(this.currentNoteId, this.user.localId);
       });
-  }
-
-  toggleTagInput() {
-    this.AddTagFlag = !this.AddTagFlag;
-  }
-
-  readTags(noteId, userId) {
-    this.notesService.readBookmarks(userId, noteId)
-         .subscribe((res: string[]) => {
-           if (res && res.length > 0) {
-              for (var i = 0; i<res.length; i++) {
-                  this.tags.push(res[i]);
-              }
-           } else {
-            this.tags = [];
-           }
-         })
   }
 
   IsNoteBookMarked(noteId, userId) {
@@ -104,47 +86,10 @@ export class HeaderComponent implements OnInit {
     // this.tagInputRef.nativeElement.focus();
   }
 
-  onKeyUp(event: KeyboardEvent): void {
-    const inputValue: string = this.form.controls.tag.value;
-    if (event.code === 'Backspace' && !inputValue) {
-      this.removeTag();
-      return;
-    } else {
-      if (event.code === 'Comma' || event.code === 'Space') {
-        this.addTag(inputValue);
-        this.form.controls.tag.setValue('');
-      }
-    }
-  }
-
-  addTag(tag: string): void {
-    if (tag[tag.length - 1] === ',' || tag[tag.length - 1] === ' ') {
-      tag = tag.slice(0, -1);
-    }
-    if (tag.length > 0 && !find(this.tags, tag)) {
-      this.tags.push(tag);
-      this.saveTagsToDB(this.tags, this.currentNoteId, this.user.localId);
-    }
-  }
-
-  removeTag(tag?: string): void {
-    if (!!tag) {
-      pull(this.tags, tag);
-      this.saveTagsToDB(this.tags, this.currentNoteId, this.user.localId);
-    } else {
-      this.tags.splice(-1);
-    }
-  }
-
-  saveTagsToDB(tags: string[], noteId: string, userId: string) {
-      this.notesService.updateNoteTags(noteId, userId, tags);
-  }
-
   sendNoteAsWhatsAppMsg() {
       const userId = this.user.localId;
       this.notesService.sendNoteContentAsWhatsAppMessageWeb(userId, this.currentNoteId);
   }
-    
   moveup() {
     window.scroll({
       top: 0,

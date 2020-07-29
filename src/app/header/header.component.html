@@ -13,10 +13,6 @@
          class="icon img-responsive">
     </div>
     <div class="p-2">
-        <img src="../../assets/003-tag.png" (click)="toggleTagInput()" 
-        title="Tags" class="icon img-responsive">
-    </div>
-    <div class="p-2">
         <img src="../../assets/whatsapp.png" (click)="sendNoteAsWhatsAppMsg()" 
         title="Send this note to your whatsapp contact"
         class="icon img-responsive">
@@ -27,19 +23,4 @@
         class="icon img-responsive move-up">
     </div>
 </div>
-<div class="d-flex flex-column" *ngIf="AddTagFlag">
-    <div [formGroup]="form" class="p-2">
-        <div class="editor-tag" (click)="focusTagInput()">
-            <span class="tag-item" *ngFor="let tag of tags">
-                  {{tag}}
-                  <span class="remove-tag" (click)="removeTag(tag)">×</span>
-                </span>
-                <input
-                placeholder="add tags.."
-                #tagInput type="text"
-                class="input-tag"
-                (keyup)="onKeyUp($event)"
-                formControlName="tag">
-              </div>
-        </div>  
-</div>
+
