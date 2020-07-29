@@ -1,8 +1,8 @@
+ 
  <div class="list-group" [ngClass]="{'bookmarked' : noteData.isBookmarked}">
             <a style="cursor: pointer;"
             [routerLink]="[noteData.id]"
             routerLinkActive="active-route"
-            (click)="onSelectedNote()"
             class="list-group-item
                 list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between note">
@@ -18,3 +18,5 @@
                 <p class="mb-1">{{noteData.noteContentPlain}}</p>
             </a>
 </div>
+
+<!-- (click)="onSelectedNote()" -->

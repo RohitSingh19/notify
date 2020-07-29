@@ -16,6 +16,11 @@
         <img src="../../assets/003-tag.png" (click)="toggleTagInput()" 
         title="Tags" class="icon img-responsive">
     </div>
+    <div class="p-2">
+        <img src="../../assets/whatsapp.png" (click)="sendNoteAsWhatsAppMsg()" 
+        title="Send this note to your whatsapp contact"
+        class="icon img-responsive">
+    </div>
 </div>
 <div class="d-flex flex-column" *ngIf="AddTagFlag">
     <div [formGroup]="form" class="p-2">

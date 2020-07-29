@@ -139,4 +139,9 @@ export class HeaderComponent implements OnInit {
   saveTagsToDB(tags: string[], noteId: string, userId: string) {
       this.notesService.updateNoteTags(noteId, userId, tags);
   }
+
+  sendNoteAsWhatsAppMsg() {
+      const userId = this.user.localId;
+      this.notesService.sendNoteContentAsWhatsAppMessageWeb(userId, this.currentNoteId);
+  }
 }

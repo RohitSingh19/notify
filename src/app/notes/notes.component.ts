@@ -92,7 +92,7 @@ export class NotesComponent implements OnInit {
         .then(() => {
           this.showAllNotes();
           this.addNewNote = true;
-        });
+    });
   }
 
 
