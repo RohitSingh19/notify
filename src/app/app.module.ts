@@ -41,6 +41,7 @@ import { CalenderComponent } from './calender/calender.component';
 import { KeysPipe } from './shared/keysPipe.pipe';
 import { SafeHTMLPipe } from './shared/safe-html.pipe';
 import { SidebarDirective } from '../app/sidebar/sirebar-directive';
+import { NavbarComponent } from './navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,8 @@ import { SidebarDirective } from '../app/sidebar/sirebar-directive';
     ModalPopUpComponent,
     KeysPipe, SafeHTMLPipe,
     SidebarDirective,
-    CalenderComponent
+    CalenderComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

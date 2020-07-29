@@ -7,6 +7,7 @@ import { HomeComponent } from '../home/home.component';
 import { AuthGaurd } from '../auth/auth.gaurd';
 import { WorkbookComponent } from '../workbook/workbook.component';
 import { CalenderComponent } from '../calender/calender.component';
+import { UserProfileComponent } from '../auth/user-profile/user-profile.component';
 
 
 const appRoutes: Routes = [
@@ -18,7 +19,8 @@ const appRoutes: Routes = [
         {path: '', component: NewNoteComponent},
         {path: ':noteId', component: WorkbookComponent}
     ]},
-    {path: 'calendar/:uid', component: CalenderComponent}
+    {path: 'calendar/:uid', component: CalenderComponent},
+    {path: 'user-profile/:uid', component: UserProfileComponent}
 ];
 
 @NgModule({

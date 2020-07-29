@@ -1,0 +1,30 @@
+.active {
+    background-color: #a1f3d7;
+    border-radius: 8px;
+}
+
+@media screen and (min-width: 701px) and (max-width: 1400px) {
+    .for-bigger-screen {
+        display: block;
+    }
+    .for-smaller-screen  {
+        display: none;
+    }
+  }
+
+@media screen and (min-width: 0px) and (max-width: 700px) {
+    .active {
+        text-decoration: underline;
+        background-color: transparent;
+        border-radius: 8px;
+        font-size: large;
+    }
+    .for-bigger-screen {
+        display: none;
+    }
+    .for-smaller-screen  {
+        display: block;
+    }
+  }
+
+

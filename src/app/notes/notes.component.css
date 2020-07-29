@@ -46,7 +46,7 @@ style-4::-webkit-scrollbar-track
 
 @media(max-width: 767px) {
   .notes-div {
-    margin-top: -600px;
+    /* margin-top: -600px; */
   }
 }
 

@@ -1,10 +1,7 @@
 .selected-note {
-    margin: 50%;
-    width: 50%;
+margin-top: 25%;
+width: 100%;
+background-color: #a1f3d7;
+border-radius: 8px;
 }
 
-/* .alert alert-primary {
-    color: #32be8f;
-    background-color: #c4ffeb;
-    border-color: #c4ffeb;
-} */
