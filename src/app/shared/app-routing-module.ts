@@ -11,16 +11,16 @@ import { UserProfileComponent } from '../auth/user-profile/user-profile.componen
 
 
 const appRoutes: Routes = [
-    {path: '', redirectTo: 'home/:uid' , pathMatch: 'full'},
+    {path: '', redirectTo: 'home/:uid' , pathMatch: 'full', canActivate: [AuthGaurd]},
     {path: 'auth/login', component: LoginComponent},
     {path: 'auth/signup', component: SignupComponent},
     {path: 'new', component: NewNoteComponent},
-    {path: 'home/:uid', component: HomeComponent, children: [
+    {path: 'home/:uid', component: HomeComponent, canActivate: [AuthGaurd], children: [
         {path: '', component: NewNoteComponent},
         {path: ':noteId', component: WorkbookComponent}
     ]},
-    {path: 'calendar/:uid', component: CalenderComponent},
-    {path: 'user-profile/:uid', component: UserProfileComponent}
+    {path: 'calendar/:uid', component: CalenderComponent, canActivate: [AuthGaurd]},
+    {path: 'user-profile/:uid', component: UserProfileComponent, canActivate: [AuthGaurd]}
 ];
 
 @NgModule({
@@ -28,6 +28,3 @@ const appRoutes: Routes = [
     exports: [RouterModule]
 })
 export class AppRoutingModule {}
-
-
-// , canActivate: [AuthGaurd]
