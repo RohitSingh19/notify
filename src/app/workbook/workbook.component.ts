@@ -108,13 +108,5 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
     this.updatedBy, this.updatedDate, noteId, noteTitle)
     .then(() => this.loader.complete());
   }
-
-  moveup() {
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
-  }
 }
 

@@ -144,4 +144,12 @@ export class HeaderComponent implements OnInit {
       const userId = this.user.localId;
       this.notesService.sendNoteContentAsWhatsAppMessageWeb(userId, this.currentNoteId);
   }
+    
+  moveup() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
 }

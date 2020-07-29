@@ -21,6 +21,11 @@
         title="Send this note to your whatsapp contact"
         class="icon img-responsive">
     </div>
+    <div class="p-2">
+        <img src="../../assets/hand.png" (click)="moveup()" 
+        title="Move Up"
+        class="icon img-responsive move-up">
+    </div>
 </div>
 <div class="d-flex flex-column" *ngIf="AddTagFlag">
     <div [formGroup]="form" class="p-2">
