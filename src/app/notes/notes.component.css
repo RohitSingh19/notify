@@ -1,6 +1,6 @@
 .notes-content {
     overflow: auto;
-    max-height: 65vh;
+    max-height: 55vh;
 }
 
 style-4::-webkit-scrollbar-track

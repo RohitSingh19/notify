@@ -3,10 +3,11 @@ import { NoteService } from '../notes/note.service';
 import { User } from '../auth/user.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthService } from '../auth/auth-service';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { find, pull } from 'lodash';
+import { FormBuilder } from '@angular/forms';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationDialogServiceService } from '../shared/confirmation-dialog/confirmation-dialog-service.service';
 import { ToastrService } from 'ngx-toastr';
+import { Note } from '../notes/note/note.model';
 
 
 @Component({
@@ -20,21 +21,22 @@ export class HeaderComponent implements OnInit {
   user: User;
   currentNoteId: string;
   noteBookmark: boolean;
-  // @ViewChild('tagInput') tagInputRef: ElementRef;
-  tags: string[] = [];
-  form: FormGroup;
-  AddTagFlag = false;
+  noteTitle: string;
+  bookmark: string;
+  createDate: string;
+  lastUpdateDate: string;
 
   constructor(private notesService: NoteService, private route: ActivatedRoute,
               private authService: AuthService, private toaster: ToastrService,
-              private fb: FormBuilder, private router: Router,
-              private confirmationDialogService: ConfirmationDialogServiceService) { }
+              private router: Router, config: NgbModalConfig,
+              private confirmationDialogService: ConfirmationDialogServiceService,
+              private modalService: NgbModal) {
+            config.backdrop = 'static';
+            config.keyboard = false;
+              }
 
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      tag: [undefined],
-    });
     this.route.params.subscribe(
       (params: Params) => {
         this.currentNoteId = params['noteId'];
@@ -59,7 +61,7 @@ export class HeaderComponent implements OnInit {
 
     const bookmark = !this.noteBookmark;
 
-    this.notesService.updateBookmark(this.user.localId, this.currentNoteId,bookmark);
+    this.notesService.updateBookmark(this.user.localId, this.currentNoteId, bookmark);
     if (bookmark) {
       this.toaster.info('Note saved to bookmark', 'Notify!');
     } else {
@@ -82,13 +84,21 @@ export class HeaderComponent implements OnInit {
     .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 
-  focusTagInput(): void {
-    // this.tagInputRef.nativeElement.focus();
-  }
-
+ 
   sendNoteAsWhatsAppMsg() {
       const userId = this.user.localId;
       this.notesService.sendNoteContentAsWhatsAppMessageWeb(userId, this.currentNoteId);
+  }
+
+  showNoteInfo(content) {
+    this.notesService.getCurrentNote(this.user.localId, this.currentNoteId)
+    .subscribe((response: Note) => {
+        this.noteTitle = response.noteTitle;
+        this.bookmark = (response.isBookmarked ? 'Yes' : 'No');
+        this.createDate = response.createdDate;
+        this.lastUpdateDate  = response.updatedDate;
+    });
+    this.modalService.open(content);
   }
   moveup() {
     window.scroll({
