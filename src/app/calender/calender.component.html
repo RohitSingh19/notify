@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
+<br />
 <div class="row">
   <div class="col-md-8 offset-md-2">
     <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins" [weekends]="true"
@@ -10,8 +11,10 @@
 
 <ng-template #NewEventContent let-d="dismiss">
   <div class="modal-header">
-    <h4 *ngIf="!isEditMode" class="modal-title text-center" id="modal-basic-title">Hi <b>{{userName}}!</b>, write your note..</h4>
-    <h4 *ngIf="isEditMode" class="modal-title text-center" id="modal-basic-title">Hi <b>{{userName}}!</b>, edit your note..</h4>
+    <h4 *ngIf="!isEditMode" class="modal-title text-center" id="modal-basic-title">Hi <b>{{userName}}!</b>, write your
+      note..</h4>
+    <h4 *ngIf="isEditMode" class="modal-title text-center" id="modal-basic-title">Hi <b>{{userName}}!</b>, edit your
+      note..</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -19,22 +22,15 @@
   <div class="modal-body">
     <p class="text-center">Selected Date: <b>{{selectedDate | date}}</b></p>
     <div>
-      <textarea class="form-control"
-      [(ngModel)]="Note" name="note"
-      [style.backgroundColor]="backgroundColorNoteTextArea"
-      placeholder="type your note here!" rows="2" cols="4">
+      <textarea class="form-control" [(ngModel)]="Note" name="note"
+        [style.backgroundColor]="backgroundColorNoteTextArea" placeholder="type your note here!" rows="2" cols="4">
       </textarea>
-      <input type="color" class="pull-right"
-      style="float:right" 
-      [(ngModel)]="pickedColor"
-      (ngModelChange)="changeComplete($event)"/>
+      <input type="color" class="pull-right" style="float:right" [(ngModel)]="pickedColor"
+        (ngModelChange)="changeComplete($event)" />
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="Save()"> 
+    <button type="button" class="btn btn-outline-dark" (click)="Save()">
       {{isEditMode ? 'Update': 'Save'}}</button>
   </div>
 </ng-template>
-
-
-

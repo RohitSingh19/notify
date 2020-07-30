@@ -10,6 +10,7 @@ import { ModalService } from 'src/app/shared/modal-popup/modal-service';
 
 
 
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -27,14 +28,18 @@ export class UserProfileComponent implements OnInit {
   optionSelected = 'Select Gender';
   imageFile: File;
   fileName: string;
+  avatarUrl: string;
   userId: string;
   userName: string;
   userEmail: string;
+  userGender: string;
+  userDOB: string;
   submitting: boolean;
   isLoading: boolean;
 
   ngOnInit(): void {
     this.fetchUser();
+    this.avatarUrl = '../../../assets/003-user.png';
   }
 
   fetchUser() {
@@ -46,6 +51,12 @@ export class UserProfileComponent implements OnInit {
           this.userName = user.name;
           this.userEmail = user.email;
           this.userId = this.currentUser.localId;
+          this.userGender = user.gender;
+          this.optionSelected = user.gender;
+          this.userDOB = user.dob;
+          if (user.avatarUrl.length > 0) {
+            this.avatarUrl = user.avatarUrl;
+          }
           this.isLoading = false;
       });
     }
@@ -58,6 +69,11 @@ export class UserProfileComponent implements OnInit {
   onFileSelection(event) {
     const fileList: FileList = event.target.files;
     if (fileList.length > 0) {
+      let reader = new FileReader();
+      reader.onload = (event :any) => {
+        this.avatarUrl = event.target.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
       this.imageFile = fileList[0];
       this.fileName = fileList[0].name;
     }
@@ -76,6 +92,6 @@ export class UserProfileComponent implements OnInit {
     this.loader.stop();
     this.toastr.success('Profile Updated!!', 'Notify!');
     this.isLoading = false;
-    this.modal.close();
+    console.log(dob);
   }
 }

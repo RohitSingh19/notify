@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -16,7 +16,7 @@ import { AuthService } from '../auth/auth-service';
   styleUrls: ['./calender.component.css'],
   providers: [NgbModalConfig, NgbModal]
 })
-export class CalenderComponent implements OnInit {
+export class CalenderComponent implements OnInit, OnDestroy {
 
 
   calendarPlugins = [dayGridPlugin, interactionPlugin, timeGridPlugin];
@@ -35,6 +35,9 @@ export class CalenderComponent implements OnInit {
               private authService: AuthService) {
     config.backdrop = 'static';
     config.keyboard = false;
+  }
+  ngOnDestroy(): void {
+    this.toaster.clear();
   }
 
 
