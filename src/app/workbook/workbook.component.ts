@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { NoteService } from '../notes/note.service';
 import { Note } from '../notes/note/note.model';
-import {fromEvent, Subscription} from 'rxjs';
+import { fromEvent} from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 
@@ -25,7 +25,6 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class WorkbookComponent implements OnInit, AfterViewInit {
 
-  
   selectedNote: Note;
   updatedBy: string;
   updatedDate: string;

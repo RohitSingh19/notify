@@ -15,7 +15,7 @@ import { environment } from '../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-// import { ColorGithubModule } from 'ngx-color/github';
+
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -23,7 +23,6 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { UserProfileComponent } from './auth/user-profile/user-profile.component';
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { NotesComponent } from './notes/notes.component';
 import { NoteComponent } from './notes/note/note.component';
 import { HeaderComponent } from './header/header.component';
@@ -31,24 +30,18 @@ import { WorkbookComponent } from './workbook/workbook.component';
 import { NewNoteComponent } from './notes/new-note/new-note.component';
 import { HomeComponent } from './home/home.component';
 import { ModalPopUpComponent } from './shared/modal-popup/modal-popup.component';
-// import { CalendarModule, DateAdapter } from 'angular-calendar';
-// import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalenderComponent } from './calender/calender.component';
-
-// import { CalenderEventsComponent } from './calender/calender-events';
-
 import { KeysPipe } from './shared/keysPipe.pipe';
 import { SafeHTMLPipe } from './shared/safe-html.pipe';
-import { SidebarDirective } from '../app/sidebar/sirebar-directive';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
     LoadingSpinnerComponent,
-    SidebarComponent,
     NotesComponent,
     NoteComponent,
     HeaderComponent,
@@ -59,7 +52,6 @@ import { NavbarComponent } from './navbar/navbar.component';
     ConfirmationDialogComponent,
     ModalPopUpComponent,
     KeysPipe, SafeHTMLPipe,
-    SidebarDirective,
     CalenderComponent,
     NavbarComponent
   ],
@@ -87,6 +79,7 @@ import { NavbarComponent } from './navbar/navbar.component';
       progressAnimation: 'decreasing'
     }),
     FullCalendarModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent],

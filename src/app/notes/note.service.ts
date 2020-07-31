@@ -136,10 +136,11 @@ export class NoteService {
         this.getCurrentNote(userId, noteId)
         .subscribe((response: Note) => {
             if (response) {
-                let msg = response.noteContentPlain;
-                msg += ` message send from : *https://notify-6f104.web.app*`;
+                let msg = response.noteContentPlain.replace('Powered by Froala Editor', '');
+                msg += ` https://notify-6f104.web.app`;
                 // tslint:disable-next-line: variable-name
                 const _url = this.whatsappWebBaseUrl + msg;
+                console.log(_url);
                 window.open(_url, '_blank');
             }
         });
@@ -149,8 +150,8 @@ export class NoteService {
         this.getCurrentNote(userId, noteId)
         .subscribe((response: Note) => {
             if (response) {
-                let msg = response.noteContentPlain;
-                msg += ` message send from : *https://notify-6f104.web.app*`;
+                let msg = response.noteContentPlain.replace('&nbsp;Powered by Froala Editor', '');
+                msg += ` https://notify-6f104.web.app`;
                 // tslint:disable-next-line: variable-name
                 const _url = this.whatsappMobileBaseUrl + msg;
                 window.open(_url, '_blank');

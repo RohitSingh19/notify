@@ -62,9 +62,7 @@ export class AuthService {
                                  expirationDate, name, '', '', '', true, 0);
 
         this.saveUserData(userProfile).subscribe((res) => {
-            console.log(res);
         });
-        
         this.saveUserDataToLocalStorage(userProfile);
     }
 

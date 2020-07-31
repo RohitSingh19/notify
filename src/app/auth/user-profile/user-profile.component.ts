@@ -92,6 +92,5 @@ export class UserProfileComponent implements OnInit {
     this.loader.stop();
     this.toastr.success('Profile Updated!!', 'Notify!');
     this.isLoading = false;
-    console.log(dob);
   }
 }
