@@ -81,7 +81,6 @@ export class CalenderComponent implements OnInit, OnDestroy {
       this.calenderService.
         updateCalenderNote(this.userId, this.eventId, this.Note, this.backgroundColorNoteTextArea)
         .then(res => {
-          console.log(this.eventId);
           const calendarEvents = this.calendarEvents.slice();
           // tslint:disable-next-line: prefer-for-of
           for (let index = 0; index < calendarEvents.length; index++) {

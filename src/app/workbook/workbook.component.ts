@@ -52,7 +52,7 @@ export class WorkbookComponent implements OnInit, AfterViewInit {
     fromEvent(this.froalTextInput.nativeElement, 'keyup').pipe(
       map((event: any) => {
         return event.target.innerHTML;
-      }), debounceTime(2000)
+      }), debounceTime(200)
     ).subscribe((text: string) => {
       this.updateNote(this.editorContent,
          text, this.noteId, this.selectedNote.noteTitle);
