@@ -85,10 +85,15 @@ export class HeaderComponent implements OnInit {
   }
 
  
-  sendNoteAsWhatsAppMsg() {
+  sendNoteAsWhatsAppMsgWeb() {
       const userId = this.user.localId;
       this.notesService.sendNoteContentAsWhatsAppMessageWeb(userId, this.currentNoteId);
   }
+
+  sendNoteAsWhatsAppMsgMobile() {
+    const userId = this.user.localId;
+    this.notesService.sendNoteContentAsWhatsAppMessageMobile(userId, this.currentNoteId);
+}
 
   showNoteInfo(content) {
     this.notesService.getCurrentNote(this.user.localId, this.currentNoteId)

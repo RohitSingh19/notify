@@ -21,8 +21,6 @@
         </div>
         <div class="form-row">
             <div class="col">
-                <!-- <input type="text" name="dob" 
-                ngbDatepicker required ngModel class="form-control" title="DOB"> -->
                 <div class="input-group">
                     <input class="form-control" placeholder="yyyy-mm-dd"
                            name="dp" [(ngModel)]="userDOB" ngbDatepicker #d="ngbDatepicker">
@@ -39,7 +37,7 @@
                     [(ngModel)]='optionSelected' (ngModelChange)='onOptionsSelected($event)'>
                     <option class='option' *ngFor='let option of options'
                     [selected]="option == userGender"
-                     [value]="option">{{option}}</option>
+                    [value]="option">{{option}}</option>
                 </select>
             </div>
         </div>
@@ -47,9 +45,9 @@
             <div class="col">
                 <div class="file-upload-wrapper" data-text="Select your file!"
                  style="border: 2px solid #4daf7c;">
-                    <input name="file-upload-field"  required
+                    <input name="file-upload-field" required
                     type="file" name="img" (change)="onFileSelection($event)"
-                        class="file-upload-field" value="">
+                    class="file-upload-field" value="">
                 </div>
             </div>
         </div>

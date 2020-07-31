@@ -8,14 +8,14 @@
         title={{bookmarkToolTip}}
             class="icon img-responsive">
     </div>
-    <div class="p-2">
-        <img src="../../assets/004-mail.png" title="Send Note As Mail"
-         class="icon img-responsive">
-    </div>
-    <div class="p-2">
-        <img src="../../assets/whatsapp.png" (click)="sendNoteAsWhatsAppMsg()" 
+    <div class="p-2 whatsApp-WebLink">
+        <img src="../../assets/whatsapp.png" (click)="sendNoteAsWhatsAppMsgWeb()" 
         title="Send this note to your whatsapp contact"
         class="icon img-responsive">
+    </div>
+    <div class="p-2 whatsApp-MobileLink" (click)="sendNoteAsWhatsAppMsgMobile()">
+        <img src="../../assets/whatsapp.png"
+         class="icon img-responsive">
     </div>
     <div class="p-2">
         <img src="../../assets/info.png" (click)="showNoteInfo(noteInfo)" 

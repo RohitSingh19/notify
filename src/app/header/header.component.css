@@ -43,13 +43,25 @@
 
 
 @media screen and (min-width: 0px) and (max-width: 700px) {
-    .move-up  {
+    .move-up {
         display: block;
+    }
+    .whatsApp-MobileLink {
+        display: block;
+    }
+    .whatsApp-WebLink{
+        display: none;
     }
 }
 
 @media screen and (min-width: 701px) and (max-width:1400px) {
     .move-up {
         display: none;
+    }
+    .whatsApp-MobileLink {
+        display: none;
+    }
+    .whatsApp-WebLink{
+        display: block;
     }
 }

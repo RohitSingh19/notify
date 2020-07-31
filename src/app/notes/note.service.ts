@@ -24,6 +24,7 @@ export class NoteService {
     invokeFirstComponentFunction = new EventEmitter();
     subsVar: Subscription;
     whatsappWebBaseUrl = 'https://web.whatsapp.com/send?text=';
+    whatsappMobileBaseUrl = 'whatsapp://send?text=';
 
     constructor(private afDb: AngularFireDatabase,
                 private http: HttpClient) { }
@@ -143,4 +144,18 @@ export class NoteService {
             }
         });
     }
+
+    sendNoteContentAsWhatsAppMessageMobile(userId: string, noteId: string) {
+        this.getCurrentNote(userId, noteId)
+        .subscribe((response: Note) => {
+            if (response) {
+                let msg = response.noteContentPlain;
+                msg += ` message send from : *https://notify-6f104.web.app*`;
+                // tslint:disable-next-line: variable-name
+                const _url = this.whatsappMobileBaseUrl + msg;
+                window.open(_url, '_blank');
+            }
+        });
+    }
+
 }
